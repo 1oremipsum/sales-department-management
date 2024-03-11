@@ -16,6 +16,24 @@ public class SellerDaoJDBC implements SellerDao{
 
 	private Connection conn;
 	
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department();
+		dep.setId(rs.getInt("Id"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
+	}
+	
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller sel = new Seller();
+		sel.setId(rs.getInt("Id"));
+		sel.setName(rs.getString("Name"));
+		sel.setEmail(rs.getString("Email"));
+		sel.setBaseSalary(rs.getDouble("BaseSalary"));
+		sel.setBirthDate(rs.getDate("BirthDate"));
+		sel.setDepartment(dep);
+		return sel;
+	}
+	
 	public SellerDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
@@ -47,18 +65,10 @@ public class SellerDaoJDBC implements SellerDao{
 					+ "INNER JOIN department ON seller.DepartmentId = department.Id WHERE seller.Id = ?");
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
+			
 			if(rs.next()) {
-				Department dep = new Department();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setName(rs.getString("DepName"));
-				Seller seller = new Seller();
-				seller.setId(rs.getInt("Id"));
-				seller.setName(rs.getString("Name"));
-				seller.setEmail(rs.getString("Email"));
-				seller.setBaseSalary(rs.getDouble("BaseSalary"));
-				seller.setBirthDate(rs.getDate("BirthDate"));
-				seller.setDepartment(dep);
-				
+				Department dep = instantiateDepartment(rs);
+				Seller seller = instantiateSeller(rs, dep);
 				return seller;
 			}
 			

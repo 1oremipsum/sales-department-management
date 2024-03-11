@@ -10,7 +10,12 @@ public class Program {
 	private static DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 	
 	public static void main(String[] args) {
+		getByIdTest();
+	}
+	
+	private static void getByIdTest() {
 		Seller seller = sellerDao.getById(3);
 		System.out.println(seller);
 	}
+
 }
