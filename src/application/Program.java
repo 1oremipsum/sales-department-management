@@ -14,6 +14,7 @@ public class Program {
 	private static DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 	
 	public static void main(String[] args) {
+		/*
 		System.out.println("* Get By Id Test:");
 		getByIdTest();
 		System.out.println();
@@ -28,6 +29,10 @@ public class Program {
 		
 		System.out.println("* Seller Insert Test: ");
 		sellerInsertTest();
+		System.out.println();
+		*/
+		System.out.println("* Seller Update Test: ");
+		sellerUpdateTest();
 	}
 	
 	private static void getByIdTest() {
@@ -51,6 +56,14 @@ public class Program {
 		seller.setDepartment(new Department(2, "Electronics"));
 		sellerDao.insert(seller);
 		System.out.println("Inserted! New id = " + seller.getId());
+	}
+	
+	private static void sellerUpdateTest() {
+		Seller seller = new Seller();
+		seller = sellerDao.getById(9);
+		seller.setName("Allan Terzi");
+		sellerDao.update(seller);
+		System.out.println("Update Completed! Updated seller id: " + seller.getId());
 	}
 	
 }
