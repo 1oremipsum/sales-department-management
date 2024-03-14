@@ -2,6 +2,7 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
@@ -12,27 +13,28 @@ import model.entities.Seller;
 public class Program {
 	private static SellerDao sellerDao = DaoFactory.createSellerDao();
 	private static DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
+	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		/*
 		System.out.println("* Get By Id Test:");
 		getByIdTest();
-		System.out.println();
 		
 		System.out.println("* Get By Department Test:");
 		getByDepartmentTest();
-		System.out.println();
 		
 		System.out.println("* Seller Get All Test:");
 		sellerGetAllTest();
-		System.out.println();
 		
 		System.out.println("* Seller Insert Test: ");
 		sellerInsertTest();
-		System.out.println();
-		*/
+		
 		System.out.println("* Seller Update Test: ");
 		sellerUpdateTest();
+		*/
+		
+		System.out.println("* Seller Delete Test:");
+		sellerDeleteTest();
 	}
 	
 	private static void getByIdTest() {
@@ -64,6 +66,15 @@ public class Program {
 		seller.setName("Allan Terzi");
 		sellerDao.update(seller);
 		System.out.println("Update Completed! Updated seller id: " + seller.getId());
+	}
+	
+	private static void sellerDeleteTest() {
+		System.out.print("Enter id for delete test: ");
+		int id = scan.nextInt();
+		Seller seller = new Seller();
+		seller = sellerDao.getById(id);
+		sellerDao.deleteById(id);
+		System.out.println("Delete completed! Deleted seller name: " + seller.getName());
 	}
 	
 }
