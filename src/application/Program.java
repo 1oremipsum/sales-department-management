@@ -15,8 +15,14 @@ public class Program {
 	public static void main(String[] args) {
 		System.out.println("* Get By Id Test:");
 		getByIdTest();
+		System.out.println();
+		
 		System.out.println("* Get By Department Test:");
 		getByDepartmentTest();
+		System.out.println();
+		
+		System.out.println("* Seller Get All Test:");
+		sellerGetAllTest();
 	}
 	
 	private static void getByIdTest() {
@@ -30,4 +36,9 @@ public class Program {
 		list.forEach(System.out::println);
 	}
 
+	private static void sellerGetAllTest() {
+		List<Seller> list = sellerDao.getAll();
+		list.forEach(System.out::println);
+	}
+	
 }
