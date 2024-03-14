@@ -16,7 +16,9 @@ public class Program {
 	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		/*
+		/* 
+		SELLER CRUD TEST
+		 
 		System.out.println("* Get By Id Test:");
 		getByIdTest();
 		
@@ -31,10 +33,13 @@ public class Program {
 		
 		System.out.println("* Seller Update Test: ");
 		sellerUpdateTest();
-		*/
 		
 		System.out.println("* Seller Delete Test:");
 		sellerDeleteTest();
+		*/
+		
+		System.out.println("* Department Insert Test:");
+		DepartmentInsertTest();
 	}
 	
 	private static void getByIdTest() {
@@ -75,6 +80,14 @@ public class Program {
 		seller = sellerDao.getById(id);
 		sellerDao.deleteById(id);
 		System.out.println("Delete completed! Deleted seller name: " + seller.getName());
+	}
+	
+	//department tests:
+	
+	private static void DepartmentInsertTest() {
+		Department dep = new Department(null, "electronic games");
+		departmentDao.insert(dep);
+		System.out.println("Inserted! New id = " + dep.getId());
 	}
 	
 }
